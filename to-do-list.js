@@ -41,12 +41,8 @@ function addInput(text) {
 
 //remove list item on click
 function removeItem() {
-  let item = this.parentNode.parentNode;
-  let parent = item.parentNode;
-  let id = parent.id;
-  let value = parent.textContent;
-
-  todo.splice(todo.indexOf(value, 1));
+  let value = this.parentNode.lastChild.textContent;
+todo.splice(todo.indexOf(value), 1);
   this.parentNode.parentNode.removeChild(this.parentNode);
   saveTodos();
 }
@@ -69,7 +65,7 @@ function getTodos() {
   localStorage.getItem("todo");
   let jsonstr = localStorage.getItem("todo");
   todo = JSON.parse(jsonstr);
-  if (!todo || !todo.length) {
+  if (!todo) {
     todo = [];
   } else {
     renderTodoList();
